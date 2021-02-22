@@ -32,7 +32,19 @@ class BoardFragment : Fragment() {
         view_player.text = activePlayer + comand
     }
 
-    fun click(view: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        button1.setOnClickListener { boardClick(it) }
+        button2.setOnClickListener { boardClick(it) }
+        button3.setOnClickListener { boardClick(it) }
+        button4.setOnClickListener { boardClick(it) }
+        button5.setOnClickListener { boardClick(it) }
+        button6.setOnClickListener { boardClick(it) }
+        button7.setOnClickListener { boardClick(it) }
+        button8.setOnClickListener { boardClick(it) }
+        button9.setOnClickListener { boardClick(it) }
+    }
+
+    fun boardClick(view: View) {
         val buttonSelected = view as Button
         var butonId = 0
         when (buttonSelected.id) {

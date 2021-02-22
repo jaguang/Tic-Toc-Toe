@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(),LoginInterface {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        loginFragment = LoginFragment.newInstance(this)
         switchFragment(loginFragment)
     }
 
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity(),LoginInterface {
     }
 
     override fun lgoinPlayer(player1: String, player2: String) {
+        boardFragment = BoardFragment()
         intent.putExtra(PLAYER1_PARAM,player1)
         intent.putExtra(PLAYER2_PARAM,player2)
 //        var bundle= Bundle()
