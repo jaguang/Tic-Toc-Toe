@@ -14,11 +14,11 @@ class BoardFragment : Fragment() {
 
     var player1 = PLAYER1_PARAM
     var player2 = PLAYER2_PARAM
-    var activePlayer = ""
+    var activePlayer = player1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activePlayer = player1
+
 
     }
 
@@ -44,6 +44,10 @@ class BoardFragment : Fragment() {
         button9.setOnClickListener { boardClick(it) }
     }
 
+    fun buttonDisable(button:Button) {
+        button.isEnabled = false
+    }
+
     fun boardClick(view: View) {
         val buttonSelected = view as Button
         var butonId = 0
@@ -63,8 +67,10 @@ class BoardFragment : Fragment() {
 
 
     private fun selectMark(buttonSelected: Button, buttonId:Int) {
+        println("$activePlayer  saddsajsadjdsadsansa bfkanfslnfsfdfds fsaifnjfsnf")
         if(activePlayer == player1) {
             buttonSelected.text = "x"
+            buttonDisable(buttonSelected)
             buttonSelected.setBackgroundColor(Color.GREEN)
             moveP1.add(buttonId)
             activePlayer = player2
@@ -72,6 +78,7 @@ class BoardFragment : Fragment() {
 
         } else {
             buttonSelected.text = "o"
+            buttonDisable(buttonSelected)
             buttonSelected.setBackgroundColor(Color.RED)
             moveP2.add(buttonId)
             activePlayer = player1

@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment(private val loginInterface: LoginInterface) : Fragment() {
+class LoginFragment : Fragment(),View.OnClickListener {
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,18 +27,30 @@ class LoginFragment(private val loginInterface: LoginInterface) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        submit_button.setOnClickListener {
-            val player1Text = player_1.text
-            val player2Text = player_2.text
-            loginInterface.lgoinPlayer(
-                    player1 = player1Text.toString(),
-                    player2 = player2Text.toString()
-            )
-        }
+
+        navController = Navigation.findNavController(view)
+        submit_button.setOnClickListener(this)
+    }
+
+    fun lgoinPlayer(player1: String, player2: String) {
+        PLAYER1_PARAM = player1
+        PLAYER2_PARAM = player2
     }
 
     companion object {
      @JvmStatic
-        fun newInstance(loginInterface: LoginInterface) = LoginFragment(loginInterface)
+        fun newInstance() = LoginFragment()
+    }
+
+    override fun onClick(p0: View?) {
+        val player1Text = player_1.text
+        val player2Text = player_2.text
+        lgoinPlayer(
+                player1 = player1Text.toString(),
+                player2 = player2Text.toString()
+        )
+        when(p0) {
+            submit_button -> navController.navigate(R.id.action_loginFragment_to_boardFragment)
+        }
     }
 }
